@@ -15,7 +15,7 @@ INCLUDE_DIR = include
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-NAME = philo_bonus
+NAME = philo
 
 .PHONY: all clean fclean re
 
@@ -23,7 +23,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES) $(LIBFT)
 	@$(CC) $(CFLAGS) -o $@ $^
-	@echo "$(GREEN)$(NAME) created.$(RESET)"
+	@echo "$(GREEN)+ $(NAME)$(RESET)"
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -35,6 +35,6 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(RED)$(NAME) deleted.$(RESET)"
+	@echo "$(RED)- $(NAME)$(RESET)"
 
 re: fclean all
