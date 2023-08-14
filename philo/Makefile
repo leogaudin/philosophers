@@ -5,8 +5,6 @@ RESET = \033[0m
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-LIBFT_PATH = include/libft
-# Add any other static library in the same fashion - 1
 
 # INCLUDE: .h files or .a library folders
 # SRC: .c files
@@ -17,39 +15,26 @@ INCLUDE_DIR = include
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-LIBFT = $(LIBFT_PATH)/libft.a
-# Add any other static library in the same fashion - 2
-
-NAME = philo
+NAME = philo_bonus
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES) $(LIBFT)
-	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_PATH)
+	@$(CC) $(CFLAGS) -o $@ $^
 	@echo "$(GREEN)$(NAME) created.$(RESET)"
-# Add any other static library in the same fashion as $(LIBFT) AND -I$(LIBFT_PATH) - 3
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -I$(LIBFT_PATH) -c -o $@ $<
-# Add any other static library in the same fashion as -I$(LIBFT_PATH) - 4
-
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_PATH)
-# Add any other static library in the same fashion - 5
+	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c -o $@ $<
 
 clean:
-	@$(MAKE) -C $(LIBFT_PATH) clean
-# Add any other static library in the same fashion - 6
 	@$(RM) -r $(OBJ_DIR)
 
 fclean: clean
-	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(RM) $(NAME)
 	@echo "$(RED)$(NAME) deleted.$(RESET)"
-# Add any other static library in the same fashion - 7
 
 re: fclean all
