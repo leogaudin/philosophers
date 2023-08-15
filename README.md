@@ -36,6 +36,8 @@
 		* [`take_forks`](#take_forks)
 		* [`leave_forks`](#leave_forks)
 		* [`routine`](#routine)
+	  * [🌟 Bonus](#bonus)
+	    * [🔢 Semaphores](#semaphores)
    * [🙏🏼 Credits](#credits)
 <!--te-->
 
@@ -197,6 +199,48 @@ The `routine` function is the one that is called by each thread.
 It is a loop that will run until a philosopher dies on the table (good dinner) or until they have eaten enough.
 
 During this loop, if he's not dead, the philosopher will try to take the forks, update its last meal time, eat for `time_to_eat` milliseconds, and then leave the forks and go to sleep for `time_to_sleep` milliseconds.
+
+### Bonus
+
+The bonus part introduces additional requirements:
+
+> *All the forks are put in the middle of the table.*
+>
+> *They have no states in memory but the number of available forks is represented by a semaphore.*
+>
+> *Each philosopher should be a process. But the main process should not be a philosopher.*
+
+Basically, it only needs the following transformations:
+
+* **Philosophers**: threads → **processes**
+* **Forks**: mutexes → **semaphores**
+
+#### Processes
+
+The current version of this repository does not include the transition from threads to processes yet.
+
+#### Semaphores
+
+A semaphore is pretty much a computer representation of a counter, with additional particularities:
+
+* `sem_open`, this method creates a new semaphore, with a name, a mode, permissions, and an initial value
+
+* `sem_wait`, this method:
+
+	1. **Locks** the counter (like *"hey, I reserved it, let me just do some things and after that I'll decrement it"*)
+	2. **Executes** the critical actions, similarly to the ones executed between `pthread_mutex_lock` and `pthread_mutex_unlock`.
+	3. **Decrements** the counter
+
+* `sem_post`, which simply increments the counter
+
+* `sem_unlink`, which unlinks (surprising) the name reserved and the semaphore
+
+* `sem_close`, which deletes and does all the freeing job on the semaphore
+
+Therefore, the bonus requirements of the subject are perfectly met by the concept of semaphores:
+
+* There is no concept of left or right fork, they can just be represented by **a counter of forks available to everyone**.
+* The **locking part** that we benefited from mutexes is still provided.
 
 ## Credits
 
