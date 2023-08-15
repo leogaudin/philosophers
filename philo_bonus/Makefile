@@ -23,7 +23,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES) $(LIBFT)
 	@$(CC) $(CFLAGS) -o $@ $^
-	@echo "$(GREEN)$(NAME) created.$(RESET)"
+	@echo "$(GREEN)+ $(NAME)$(RESET)"
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -35,6 +35,6 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(RED)$(NAME) deleted.$(RESET)"
+	@echo "$(RED)- $(NAME)$(RESET)"
 
 re: fclean all
