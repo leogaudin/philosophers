@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:12:03 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/15 14:37:54 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/19 15:15:13 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define LIGHT_GRAY "\033[0;37m"
 # define RESET "\033[1;37m"
 
-struct s_table;
+struct	s_table;
 
 typedef struct s_philo
 {
