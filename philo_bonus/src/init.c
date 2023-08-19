@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:43:47 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/15 14:38:19 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/19 15:20:18 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_forks(t_table *table)
 {
+	sem_unlink("forks");
 	table->forks = sem_open("forks", O_CREAT, 0600, table->nb_philo);
 }
 
