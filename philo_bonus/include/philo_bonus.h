@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:12:03 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/19 15:15:13 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/22 14:20:41 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,9 @@ void				print_dead(t_philo *ph);
 void				print_thinking(t_philo *ph);
 void				print_sleeping(t_philo *ph);
 void				print_forks(t_philo *ph);
+
+// bonuses.c
+void				kill_everyone(t_table *table);
+void				check_death(t_table *table);
 
 #endif

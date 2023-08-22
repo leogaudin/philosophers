@@ -6,32 +6,35 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:11:58 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/15 14:38:19 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/22 14:20:32 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo_bonus.h"
+#include <sys/wait.h>
 
 void	*routine(void *philo)
 {
 	t_philo	*ph;
 
 	ph = (t_philo *)philo;
-	while (!ph->table->has_dead && !did_everyone_eat_enough(ph->table))
+	while ((ph->eat_count < ph->table->nb_eat || ph->table->nb_eat == -1)
+		&& !ph->table->has_dead)
 	{
+		print_thinking(ph);
+		take_forks(ph);
 		if (get_time() - ph->last_meal > ph->table->time_to_die)
 		{
 			ph->table->has_dead = true;
 			print_dead(ph);
-			return (NULL);
+			exit(EXIT_FAILURE);
 		}
-		print_thinking(ph);
-		take_forks(ph);
 		ph->last_meal = get_time();
 		print_eating(ph);
 		usleep(ph->table->time_to_eat * 1000);
 		leave_forks(ph);
 	}
+	exit(EXIT_SUCCESS);
 	return (NULL);
 }
 
@@ -50,15 +53,17 @@ void	start_simulation(t_table *table)
 	i = 0;
 	while (i < table->nb_philo)
 	{
-		pthread_create(&table->threads[i], NULL, &routine, &table->philos[i]);
+		table->pid[i] = fork();
+		if (table->pid[i] == 0)
+			routine(&table->philos[i]);
 		i++;
+	}
+	while (1)
+	{
+		check_death(table);
+		exit(EXIT_FAILURE);
 	}
 	i = 0;
-	while (i < table->nb_philo)
-	{
-		pthread_join(table->threads[i], NULL);
-		i++;
-	}
 }
 
 void	end_simulation(t_table *table)
