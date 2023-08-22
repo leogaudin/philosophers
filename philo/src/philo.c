@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:11:58 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/22 14:17:17 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/22 15:23:23 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	*routine(void *philo)
 	ph = (t_philo *)philo;
 	while (!ph->table->has_dead && !did_everyone_eat_enough(ph->table))
 	{
-		print_thinking(ph);
-		take_forks(ph);
 		if (get_time() - ph->last_meal > ph->table->time_to_die)
 		{
 			ph->table->has_dead = true;
 			print_dead(ph);
 			return (NULL);
 		}
+		print_thinking(ph);
+		take_forks(ph);
 		ph->last_meal = get_time();
 		print_eating(ph);
 		usleep(ph->table->time_to_eat * 1000);
