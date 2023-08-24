@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:45:12 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/24 14:37:52 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 15:35:07 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	*check_deaths(void *void_table)
 	{
 		if (get_time() - table->philos[i].last_meal > table->time_to_die
 			&& table->philos[i].last_meal != -1
-			&& table->philos[i].eat_count < table->nb_eat)
+			&& (table->philos[i].eat_count < table->nb_eat
+				|| table->nb_eat == -1))
 		{
 			print_dead(&table->philos[i]);
 			table->has_dead = true;

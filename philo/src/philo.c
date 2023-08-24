@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:11:58 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/24 14:39:17 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 15:34:39 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	*routine(void *philo)
 	ph->last_meal = get_time();
 	ph->monitor = malloc(sizeof(pthread_t));
 	pthread_create(&ph->monitor, NULL, &check_deaths, ph->table);
+	if (ph->id % 2 == 0)
+		ft_usleep(1);
 	while (!ph->table->has_dead && !did_everyone_eat_enough(ph->table))
 	{
-		if (ph->id % 2 == 0)
-			ft_usleep(1);
 		print_thinking(ph);
 		take_forks(ph);
-		ph->last_meal = get_time();
 		print_eating(ph);
-		ft_usleep(ph->table->time_to_eat);
+		ph->last_meal = get_time();
+		ft_usleep(ph->table->time_to_eat - 5);
 		leave_forks(ph);
 	}
 	return (NULL);
