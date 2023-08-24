@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:11:58 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/24 14:32:16 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 14:39:17 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*routine(void *philo)
 		take_forks(ph);
 		ph->last_meal = get_time();
 		print_eating(ph);
-		ft_usleep(ph->table->time_to_eat - 40);
+		ft_usleep(ph->table->time_to_eat);
 		leave_forks(ph);
 	}
 	return (NULL);

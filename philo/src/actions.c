@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:46:13 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/24 14:33:09 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 14:40:19 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	take_forks(t_philo *ph)
 void	go_to_sleep(t_philo *ph)
 {
 	print_sleeping(ph);
-	ft_usleep(ph->table->time_to_sleep - 40);
+	ft_usleep(ph->table->time_to_sleep);
 	ph->eat_count++;
 }
 
