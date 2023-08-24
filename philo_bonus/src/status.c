@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:44:22 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/15 14:38:19 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 15:38:30 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 void	print_eating(t_philo *ph)
 {
-	if (!ph->table->has_dead)
-		printf(LIGHT_GREEN "%ldms\t%d\tis eating\n" RESET, chrono(ph), ph->id);
+	printf(LIGHT_GREEN "%ld %d is eating\n" RESET, get_time()
+		- ph->table->start_time, ph->id);
 }
 
 void	print_dead(t_philo *ph)
 {
-	printf(LIGHT_RED "%ldms\t%d\tdied\n" RESET, chrono(ph), ph->id);
+	printf(LIGHT_RED "%ld %d died\n" RESET, get_time() - ph->table->start_time,
+		ph->id);
 }
 
 void	print_thinking(t_philo *ph)
 {
-	if (!ph->table->has_dead)
-		printf(BLACK "%ldms\t%d\tis thinking\n" RESET, chrono(ph), ph->id);
+	printf(BLACK "%ld %d is thinking\n" RESET, get_time()
+		- ph->table->start_time, ph->id);
 }
 
 void	print_sleeping(t_philo *ph)
 {
-	if (!ph->table->has_dead)
-		printf(BLUE "%ldms\t%d\tis sleeping\n" RESET, chrono(ph), ph->id);
+	printf(BLUE "%ld %d is sleeping\n" RESET, get_time()
+		- ph->table->start_time, ph->id);
 }
 
 void	print_forks(t_philo *ph)
 {
-	if (!ph->table->has_dead)
-		printf(BROWN_ORANGE "%ldms\t%d\thas taken a fork\n" RESET, chrono(ph),
-			ph->id);
+	printf(BROWN_ORANGE "%ld %d has taken a fork\n" RESET, get_time()
+		- ph->table->start_time, ph->id);
 }

@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:45:12 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/15 14:38:19 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 16:03:08 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ bool	ft_is_valid_atoi(const char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' || str[i] == '\r'
+		|| str[i] == '\t' || str[i] == '\v')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
@@ -85,4 +85,25 @@ bool	arguments_valid(int argc, char **argv)
 		i++;
 	}
 	return (true);
+}
+
+void	*check_deaths(void *void_table)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)void_table;
+	while (1)
+	{
+		if (get_time() - philo->last_meal > philo->table->time_to_die
+			&& philo->last_meal != -1
+			&& (philo->eat_count < philo->table->nb_eat
+				|| philo->table->nb_eat == -1))
+		{
+			print_dead(philo);
+			philo->table->has_dead = true;
+			kill_everyone(philo->table, philo->id);
+			exit(EXIT_FAILURE);
+		}
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:46:48 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/15 14:38:19 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 16:03:17 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,9 @@ void	print_usage(void)
 	[time_to_sleep]\
 	[number_of_time_each_philosophers_must_eat]\n" RESET);
 	exit(EXIT_FAILURE);
+}
+
+void	ft_usleep(int ms)
+{
+	usleep(ms * 1000);
 }

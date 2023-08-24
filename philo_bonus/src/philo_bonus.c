@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:11:58 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/22 14:20:32 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 16:03:42 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,30 @@ void	*routine(void *philo)
 	t_philo	*ph;
 
 	ph = (t_philo *)philo;
+	ph->last_meal = get_time();
+	ph->monitor = malloc(sizeof(pthread_t));
+	pthread_create(&ph->monitor, NULL, &check_deaths, ph);
+	if (ph->id % 2 == 0)
+		ft_usleep(1);
 	while ((ph->eat_count < ph->table->nb_eat || ph->table->nb_eat == -1)
 		&& !ph->table->has_dead)
 	{
 		print_thinking(ph);
 		take_forks(ph);
-		if (get_time() - ph->last_meal > ph->table->time_to_die)
-		{
-			ph->table->has_dead = true;
-			print_dead(ph);
-			exit(EXIT_FAILURE);
-		}
-		ph->last_meal = get_time();
 		print_eating(ph);
-		usleep(ph->table->time_to_eat * 1000);
+		ph->last_meal = get_time();
+		ft_usleep(ph->table->time_to_eat);
 		leave_forks(ph);
 	}
 	exit(EXIT_SUCCESS);
 	return (NULL);
+}
+
+void	one_philo(t_table *table)
+{
+	print_thinking(&table->philos[0]);
+	ft_usleep(table->time_to_die);
+	print_dead(&table->philos[0]);
 }
 
 void	start_simulation(t_table *table)
@@ -44,12 +50,7 @@ void	start_simulation(t_table *table)
 
 	table->start_time = get_time();
 	if (table->nb_philo == 1)
-	{
-		print_thinking(&table->philos[0]);
-		usleep(table->time_to_die * 1000);
-		print_dead(&table->philos[0]);
-		return ;
-	}
+		return (one_philo(table));
 	i = 0;
 	while (i < table->nb_philo)
 	{
@@ -58,12 +59,7 @@ void	start_simulation(t_table *table)
 			routine(&table->philos[i]);
 		i++;
 	}
-	while (1)
-	{
-		check_death(table);
-		exit(EXIT_FAILURE);
-	}
-	i = 0;
+	waitpid(-1, 0, 0);
 }
 
 void	end_simulation(t_table *table)
