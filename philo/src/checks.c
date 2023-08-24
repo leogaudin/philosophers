@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:45:12 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/14 18:03:27 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 14:37:52 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ bool	ft_is_valid_atoi(const char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' || str[i] == '\r'
+		|| str[i] == '\t' || str[i] == '\v')
 		i++;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
+	if (str[i] == '-')
+		return (false);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] == '\0')
@@ -85,4 +85,26 @@ bool	arguments_valid(int argc, char **argv)
 		i++;
 	}
 	return (true);
+}
+
+void	*check_deaths(void *void_table)
+{
+	int		i;
+	t_table	*table;
+
+	i = 0;
+	table = (t_table *)void_table;
+	while (1)
+	{
+		if (get_time() - table->philos[i].last_meal > table->time_to_die
+			&& table->philos[i].last_meal != -1
+			&& table->philos[i].eat_count < table->nb_eat)
+		{
+			print_dead(&table->philos[i]);
+			table->has_dead = true;
+			exit(EXIT_FAILURE);
+		}
+		i = (i + 1) % table->nb_philo;
+	}
+	return (0);
 }

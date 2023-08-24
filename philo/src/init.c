@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:43:47 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/15 07:39:55 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 14:14:10 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_philos(t_table *table)
 		table->philos[i].id = i + 1;
 		table->philos[i].table = table;
 		table->philos[i].eat_count = 0;
-		table->philos[i].last_meal = get_time();
+		table->philos[i].last_meal = -1;
 		table->philos[i].left_fork = &table->forks[i];
 		table->philos[i].right_fork = &table->forks[(i + 1) % table->nb_philo];
 		i++;

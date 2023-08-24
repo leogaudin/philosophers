@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:12:03 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/14 18:06:37 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/24 14:32:32 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	struct s_table	*table;
+	pthread_t		monitor;
 }					t_philo;
 
 typedef struct s_table
@@ -73,6 +74,7 @@ bool				did_everyone_eat_enough(t_table *table);
 int					ft_atoi(const char *str);
 bool				ft_is_valid_atoi(const char *str);
 bool				arguments_valid(int argc, char **argv);
+void				*check_deaths(void *void_table);
 
 // init.c
 void				init_forks(t_table *table);
@@ -81,8 +83,9 @@ void				init_table(t_table *table, int ac, char **av);
 
 // miscellaneous.c
 long				get_time(void);
-long				chrono(t_philo *ph);
+int					chrono(t_philo *ph);
 void				print_usage(void);
+void				ft_usleep(int ms);
 
 // status.c
 void				print_eating(t_philo *ph);
