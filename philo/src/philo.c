@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:11:58 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/24 15:34:39 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/27 13:16:17 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*routine(void *philo)
 	ph->last_meal = get_time();
 	ph->monitor = malloc(sizeof(pthread_t));
 	pthread_create(&ph->monitor, NULL, &check_deaths, ph->table);
+	pthread_detach(ph->monitor);
 	if (ph->id % 2 == 0)
 		ft_usleep(1);
 	while (!ph->table->has_dead && !did_everyone_eat_enough(ph->table))
@@ -73,9 +74,12 @@ void	end_simulation(t_table *table)
 		pthread_mutex_destroy(&table->forks[i]);
 		i++;
 	}
-	free(table->forks);
-	free(table->threads);
-	free(table->philos);
+	if (table->forks)
+		free(table->forks);
+	if (table->threads)
+		free(table->threads);
+	if (table->philos)
+		free(table->philos);
 }
 
 int	main(int argc, char **argv)

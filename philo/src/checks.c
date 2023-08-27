@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:45:12 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/24 15:35:07 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/27 13:14:44 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	*check_deaths(void *void_table)
 	table = (t_table *)void_table;
 	while (1)
 	{
+		if (did_everyone_eat_enough(table))
+			break ;
 		if (get_time() - table->philos[i].last_meal > table->time_to_die
 			&& table->philos[i].last_meal != -1
 			&& (table->philos[i].eat_count < table->nb_eat
