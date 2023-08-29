@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:11:58 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/27 13:16:17 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/08/28 15:33:09 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	*routine(void *philo)
 
 	ph = (t_philo *)philo;
 	ph->last_meal = get_time();
-	ph->monitor = malloc(sizeof(pthread_t));
 	pthread_create(&ph->monitor, NULL, &check_deaths, ph->table);
 	pthread_detach(ph->monitor);
 	if (ph->id % 2 == 0)
