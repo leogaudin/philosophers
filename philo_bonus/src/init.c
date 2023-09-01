@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:43:47 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/29 10:00:04 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/09/01 13:07:25 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void	init_table(t_table *table, int ac, char **av)
 	else
 		table->nb_eat = -1;
 	table->philos = malloc(sizeof(t_philo) * table->nb_philo);
+	table->pid = malloc(sizeof(pid_t) * table->nb_philo);
 }

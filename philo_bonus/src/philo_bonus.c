@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:11:58 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/08/29 10:01:04 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/09/01 13:07:42 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	end_simulation(t_table *table)
 		sem_close(table->forks);
 		i++;
 	}
+	free(table->pid);
 	free(table->philos);
 }
 
