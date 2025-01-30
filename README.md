@@ -244,6 +244,4 @@ Therefore, the bonus requirements of the subject are perfectly met by the concep
 
 ## Credits
 
-*🙇🏻‍♂️ The playlist from CodeVault is super useful and can make you go from "how the hell does this work" to "okay let's go this is fire".*
-
-[Link to the playlist](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)
+[🙇🏻‍♂️ The playlist from CodeVault is super useful](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)
